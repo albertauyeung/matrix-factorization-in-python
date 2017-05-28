@@ -18,7 +18,7 @@ R = np.array([
     [0, 1, 5, 4],
 ])
 
-# Perform training and obtian the 
+# Perform training and obtain the user and item matrices 
 mf = MF(R, K=2, alpha=0.1, beta=0.01, iterations=20)
 training_process = mf.train()
 print(mf.P)
