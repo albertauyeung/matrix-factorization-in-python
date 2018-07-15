@@ -91,4 +91,4 @@ class MF():
         """
         Computer the full matrix using the resultant biases, P and Q
         """
-        return mf.b + mf.b_u[:,np.newaxis] + mf.b_i[np.newaxis:,] + mf.P.dot(mf.Q.T)
+        return self.b + self.b_u[:,np.newaxis] + self.b_i[np.newaxis:,] + self.P.dot(self.Q.T)
