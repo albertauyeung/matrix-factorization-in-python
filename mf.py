@@ -76,9 +76,12 @@ class MF():
             self.b_u[i] += self.alpha * (e - self.beta * self.b_u[i])
             self.b_i[j] += self.alpha * (e - self.beta * self.b_i[j])
             
+            # Create copy of row of P since we need to update it but use older values for update on Q
+            P_i = self.P[i, :][:]
+            
             # Update user and item latent feature matrices
             self.P[i, :] += self.alpha * (e * self.Q[j, :] - self.beta * self.P[i,:])
-            self.Q[j, :] += self.alpha * (e * self.P[i, :] - self.beta * self.Q[j,:])
+            self.Q[j, :] += self.alpha * (e * P_i - self.beta * self.Q[j,:])
 
     def get_rating(self, i, j):
         """
