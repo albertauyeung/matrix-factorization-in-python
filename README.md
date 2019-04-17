@@ -18,11 +18,28 @@ R = np.array([
     [0, 1, 5, 4],
 ])
 
+
+#because there are many dot products to calculate during the procedure, GPU can be used for this task
+while True:
+
+	gpu_input = input('Do you want to run it to GPU, yy/nn: ')
+
+	if(gpu_input=='yy' or gpu_input=='nn'): 
+		
+		gpu = (gpu_input=='yy')
+
+		if(gpu): print('GPU implementation \n\n')
+
+		break
+
+
+
 # Perform training and obtain the user and item matrices 
-mf = MF(R, K=2, alpha=0.1, beta=0.01, iterations=20)
+mf = MF(gpu, R, K=2, alpha=0.1, beta=0.01, iterations=20)
 training_process = mf.train()
 print(mf.P)
 print(mf.Q)
+print("GPU Implementation: ",gpu)
 print(mf.full_matrix())
 
 # Prints the following:
