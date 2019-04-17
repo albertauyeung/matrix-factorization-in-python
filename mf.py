@@ -1,9 +1,15 @@
+import pycuda.autoinit
+import pycuda.gpuarray as gpuarray
+import skcuda.linalg as linalg
 import numpy as np
+import math
+import skcuda.misc as misc
+
 
 
 class MF():
     
-    def __init__(self, R, K, alpha, beta, iterations):
+    def __init__(self, gpu, R, K, alpha, beta, iterations):
         """
         Perform matrix factorization to predict empty
         entries in a matrix.
@@ -13,8 +19,10 @@ class MF():
         - K (int)       : number of latent dimensions
         - alpha (float) : learning rate
         - beta (float)  : regularization parameter
+        - gpu (boolean) : declares the GPU implementation
         """
         
+        self.gpu = gpu
         self.R = R
         self.num_users, self.num_items = R.shape
         self.K = K
@@ -85,13 +93,47 @@ class MF():
 
     def get_rating(self, i, j):
         """
-        Get the predicted rating of user i and item j
+        Get the predicted rating of user i and item j, regarding the value of boolean variable 'gpu' we do our calculation accordingly 
         """
-        prediction = self.b + self.b_u[i] + self.b_i[j] + self.P[i, :].dot(self.Q[j, :].T)
+        
+        if(self.gpu):
+            
+            #initialization
+            linalg.init()
+
+            #make the appropriate format
+            p_gpu = gpuarray.to_gpu(self.P)
+            q_gpu = gpuarray.to_gpu(self.Q)
+
+            prediction = self.b + self.b_u[i] + self.b_i[j] + linalg.dot(p_gpu[i, :],q_gpu[j, :],transb='T')
+        
+        
+        else:
+                    
+            prediction = self.b + self.b_u[i] + self.b_i[j] + self.P[i, :].dot(self.Q[j, :].T)
+        
+        
         return prediction
     
     def full_matrix(self):
         """
         Computer the full matrix using the resultant biases, P and Q
         """
-        return self.b + self.b_u[:,np.newaxis] + self.b_i[np.newaxis:,] + self.P.dot(self.Q.T)
+        
+        if(self.gpu):
+            
+            #initialization
+            linalg.init()
+
+            #make the appropriate format
+            p_gpu = gpuarray.to_gpu(self.P)
+            q_gpu = gpuarray.to_gpu(self.Q)
+
+            #we denote as transb='T' that we take the second argument, matrix q_gpu as transpose
+            fullMatrix = self.b + self.b_u[:,np.newaxis] + self.b_i[np.newaxis:,] + linalg.dot(p_gpu, q_gpu, transb='T').get()
+        
+        else:
+            
+            fullMatrix = self.b + self.b_u[:,np.newaxis] + self.b_i[np.newaxis:,] + self.P.dot(self.Q.T)
+            
+        return fullMatrix
