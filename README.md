@@ -29,7 +29,6 @@ mf = MF(R, K=2, alpha=0.1, beta=0.01, iterations=20, use_gpu=False)
 training_process = mf.train()
 print(mf.P)
 print(mf.Q)
-print("GPU Implementation: ",gpu)
 print(mf.full_matrix())
 
 # Prints the following:
