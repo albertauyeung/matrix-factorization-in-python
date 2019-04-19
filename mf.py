@@ -9,7 +9,7 @@ import skcuda.misc as misc
 
 class MF():
     
-    def __init__(self, gpu, R, K, alpha, beta, iterations):
+    def __init__(self, R, K, alpha, beta, iterations, use_gpu):
         """
         Perform matrix factorization to predict empty
         entries in a matrix.
@@ -19,7 +19,7 @@ class MF():
         - K (int)       : number of latent dimensions
         - alpha (float) : learning rate
         - beta (float)  : regularization parameter
-        - gpu (boolean) : declares the GPU implementation
+        - use_gpu (boolean) : declares the GPU implementation
         """
         
         self.gpu = gpu
@@ -96,7 +96,7 @@ class MF():
         Get the predicted rating of user i and item j, regarding the value of boolean variable 'gpu' we do our calculation accordingly 
         """
         
-        if(self.gpu):
+        if(self.use_gpu):
             
             #initialization
             linalg.init()
@@ -120,7 +120,7 @@ class MF():
         Computer the full matrix using the resultant biases, P and Q
         """
         
-        if(self.gpu):
+        if(self.use_gpu):
             
             #initialization
             linalg.init()
