@@ -20,22 +20,12 @@ R = np.array([
 
 
 #because there are many dot products to calculate during the procedure, GPU can be used for this task
-while True:
-
-	gpu_input = input('Do you want to run it to GPU, yy/nn: ')
-
-	if(gpu_input=='yy' or gpu_input=='nn'): 
-		
-		gpu = (gpu_input=='yy')
-
-		if(gpu): print('GPU implementation \n\n')
-
-		break
+#use_gpu = False/True,   Set to True to use GPU in training and prediction
 
 
 
 # Perform training and obtain the user and item matrices 
-mf = MF(gpu, R, K=2, alpha=0.1, beta=0.01, iterations=20)
+mf = MF(R, K=2, alpha=0.1, beta=0.01, iterations=20, use_gpu=False)
 training_process = mf.train()
 print(mf.P)
 print(mf.Q)
@@ -55,8 +45,6 @@ print(mf.full_matrix())
  [ 0.18071811 -1.2672859 ]
  [-1.4211893   0.20465575]]
  
- GPU Implementation:  False
- 
 [[ 4.98407556  2.99856476  3.96309763  1.01351377]
  [ 3.99274702  2.27661831  3.20365416  1.0125506 ]
  [ 1.0064803   1.00498576  2.37696737  4.98530109]
@@ -67,7 +55,7 @@ print(mf.full_matrix())
  
  
 # Perform training and obtain the user and item matrices, using GPU for the multiplications
-mf = MF(gpu, R, K=2, alpha=0.1, beta=0.01, iterations=20)
+mf = MF(R, K=2, alpha=0.1, beta=0.01, iterations=20, use_gpu=True)
 
 
 # Prints the following:
@@ -83,8 +71,6 @@ mf = MF(gpu, R, K=2, alpha=0.1, beta=0.01, iterations=20)
  [ 0.02231156 -1.12899481]
  [-0.98101813  0.33079953]
  [ 1.65238654  0.79608774]]
- 
-GPU Implementation:  True
 
 [[4.993465   2.98861347 5.3236645  1.01310464]
  [3.99121154 1.86497915 4.45591865 1.00713051]
