@@ -1,7 +1,7 @@
 Prerequisite libraries:
 
 
-	----> #math
+	----> math
 
 		import math
 
@@ -34,7 +34,7 @@ Prerequisite libraries:
 			- NVIDIA CUDA Toolkit 5.0 or later.
 
 
-	----> **pycuda**
+	----> pycuda
 
 		pip: pip install pycuda
 
