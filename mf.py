@@ -93,7 +93,7 @@ class MF():
 
     def get_rating(self, i, j):
         """
-        Get the predicted rating of user i and item j, regarding the value of boolean variable 'gpu' we do our calculation accordingly 
+        Get the predicted rating of user i and item j, regarding the value of boolean variable 'use_gpu' we do our calculation accordingly 
         """
         
         if(self.use_gpu):
