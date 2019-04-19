@@ -1,19 +1,19 @@
 Prerequisite libraries:
 
 
-	----> math
+	----> **math**
 
 		import math
 
 
-	----> numpy
+	----> **numpy**
 
 		pip: pip install numpy
 
 		anaconda: conda install -c anaconda numpy
 
 
-	----> scikit-cuda (skcuda)
+	----> **scikit-cuda (skcuda)**
 
 		pip: pip install scikit-cuda
 
@@ -34,7 +34,7 @@ Prerequisite libraries:
 			- NVIDIA CUDA Toolkit 5.0 or later.
 
 
-	----> pycuda
+	----> **pycuda**
 
 		pip: pip install pycuda
 
