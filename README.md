@@ -1,6 +1,6 @@
 # Implementation of Matrix Factorization in Python
 
-The source code [mf.py](mf.py) is an implementation of the matrix factorization algorithm in Python, using stochastic gradient descent. An article with detailed explanation of the algorithm can be found at [http://www.albertauyeung.com/post/python-matrix-factorization/](http://www.albertauyeung.com/post/python-matrix-factorization/).
+The source code [mf.py](mf.py) is an implementation of the matrix factorization algorithm in Python, using stochastic gradient descent. An article with detailed explanation of the algorithm can be found at [http://albertauyeung.com/2017/04/23/python-matrix-factorization/](http://albertauyeung.com/2017/04/23/python-matrix-factorization/).
 
 Below is an example of using the algorithm:
 
