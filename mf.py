@@ -61,7 +61,7 @@ class MF():
         error = 0
         for x, y in zip(xs, ys):
             error += pow(self.R[x, y] - predicted[x, y], 2)
-        return np.sqrt(error)
+        return error/len(xs)
 
     def sgd(self):
         """
